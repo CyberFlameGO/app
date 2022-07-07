@@ -3,6 +3,164 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.30.11](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.10...@standardnotes/mobile@3.30.11) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.30.10](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.9...@standardnotes/mobile@3.30.10) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.30.9](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.8...@standardnotes/mobile@3.30.9) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.30.8](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.7...@standardnotes/mobile@3.30.8) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.30.7](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.6...@standardnotes/mobile@3.30.7) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.30.6](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.5...@standardnotes/mobile@3.30.6) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.30.5](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.4...@standardnotes/mobile@3.30.5) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.30.4](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.3...@standardnotes/mobile@3.30.4) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.30.3](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.2...@standardnotes/mobile@3.30.3) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.30.2](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.1...@standardnotes/mobile@3.30.2) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.30.1](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.30.0...@standardnotes/mobile@3.30.1) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+# [3.30.0](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.29.0...@standardnotes/mobile@3.30.0) (2022-07-06)
+
+### Bug Fixes
+
+* deps on weba and mobile ([d380711](https://github.com/standardnotes/app/commit/d38071168ac343a952643647996fca5f1018f2b1))
+
+### Features
+
+* add snjs package ([0e40469](https://github.com/standardnotes/app/commit/0e40469e2fe868b88860f0f2541364696d8f7957))
+
+# [3.29.0](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.28.3...@standardnotes/mobile@3.29.0) (2022-07-06)
+
+### Bug Fixes
+
+* add dompurify to mobile package to fix the build process ([21d8a99](https://github.com/standardnotes/app/commit/21d8a99b3de3dc32e9625d00f9d0c818ff08ac66))
+* missing utils dep on mobile ([e2e9a11](https://github.com/standardnotes/app/commit/e2e9a119841a746d0a6b51e60026b5f542cdf163))
+
+### Features
+
+* add sncrypto client side packages ([6ec6679](https://github.com/standardnotes/app/commit/6ec66795d21bdfa5abfa08c3b79b19b5c4cd0449))
+
+## [3.28.3](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.28.2...@standardnotes/mobile@3.28.3) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.28.2](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.28.1...@standardnotes/mobile@3.28.2) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.28.1](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.28.0...@standardnotes/mobile@3.28.1) (2022-07-05)
+
+### Bug Fixes
+
+* mobile metro config for files and services ([f4cde8f](https://github.com/standardnotes/app/commit/f4cde8f75264d5d4342dd4f0f80dbd2e77061df1))
+
+# [3.28.0](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.13...@standardnotes/mobile@3.28.0) (2022-07-05)
+
+### Features
+
+* add filepicker package ([d4188a3](https://github.com/standardnotes/app/commit/d4188a3fa2914a48fd28d80d45269a3eb9a358a8))
+
+## [3.27.13](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.12...@standardnotes/mobile@3.27.13) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.12](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.11...@standardnotes/mobile@3.27.12) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.11](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.10...@standardnotes/mobile@3.27.11) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.10](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.9...@standardnotes/mobile@3.27.10) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.9](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.8...@standardnotes/mobile@3.27.9) (2022-07-05)
+
+### Bug Fixes
+
+* add missing features package on mobile ([7ab2f7a](https://github.com/standardnotes/app/commit/7ab2f7a32d1dc202e8d52678a5f3c97c2b6c0b44))
+* workspace dependencies on mobile ([9c7f713](https://github.com/standardnotes/app/commit/9c7f713baace7d7beff96d997922f200c2004dc2))
+
+## [3.27.8](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.7...@standardnotes/mobile@3.27.8) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.7](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.6...@standardnotes/mobile@3.27.7) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.6](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.5...@standardnotes/mobile@3.27.6) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.5](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.4...@standardnotes/mobile@3.27.5) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.4](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.3...@standardnotes/mobile@3.27.4) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.3](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.2...@standardnotes/mobile@3.27.3) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.2](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.1...@standardnotes/mobile@3.27.2) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.27.1](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.27.0...@standardnotes/mobile@3.27.1) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+# [3.27.0](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.26.14...@standardnotes/mobile@3.27.0) (2022-07-05)
+
+### Features
+
+* add @standardnotes/encryption package ([#1199](https://github.com/standardnotes/app/issues/1199)) ([e5771fc](https://github.com/standardnotes/app/commit/e5771fcbde827afd178edde3b7bd872734cd3338))
+
+## [3.26.14](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.26.13...@standardnotes/mobile@3.26.14) (2022-07-04)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.26.13](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.26.12...@standardnotes/mobile@3.26.13) (2022-07-04)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
+## [3.26.12](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.26.11...@standardnotes/mobile@3.26.12) (2022-07-04)
+
+**Note:** Version bump only for package @standardnotes/mobile
+
 ## [3.26.11](https://github.com/standardnotes/app/compare/@standardnotes/mobile@3.26.10...@standardnotes/mobile@3.26.11) (2022-07-02)
 
 **Note:** Version bump only for package @standardnotes/mobile

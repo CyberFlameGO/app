@@ -3,6 +3,122 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.37.7](https://github.com/standardnotes/app/compare/@standardnotes/web@3.37.6...@standardnotes/web@3.37.7) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web
+
+## [3.37.6](https://github.com/standardnotes/app/compare/@standardnotes/web@3.37.5...@standardnotes/web@3.37.6) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web
+
+## [3.37.5](https://github.com/standardnotes/app/compare/@standardnotes/web@3.37.4...@standardnotes/web@3.37.5) (2022-07-06)
+
+### Bug Fixes
+
+* **web:** scrollbar styles ([#1219](https://github.com/standardnotes/app/issues/1219)) ([34719c4](https://github.com/standardnotes/app/commit/34719c49357bee36ffc904d02511b66f34399e86))
+
+## [3.37.4](https://github.com/standardnotes/app/compare/@standardnotes/web@3.37.3...@standardnotes/web@3.37.4) (2022-07-06)
+
+### Bug Fixes
+
+* **web:** update modal styles ([#1220](https://github.com/standardnotes/app/issues/1220)) ([6fa6374](https://github.com/standardnotes/app/commit/6fa6374cf2a283070977b43b0ac4542d054aee96))
+
+## [3.37.3](https://github.com/standardnotes/app/compare/@standardnotes/web@3.37.2...@standardnotes/web@3.37.3) (2022-07-06)
+
+### Bug Fixes
+
+* select next item when trashing or deleting item ([#1218](https://github.com/standardnotes/app/issues/1218)) ([2ee7912](https://github.com/standardnotes/app/commit/2ee791259dca709d03db2ebded7972ce7c3b788e))
+
+## [3.37.2](https://github.com/standardnotes/app/compare/@standardnotes/web@3.37.1...@standardnotes/web@3.37.2) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web
+
+## [3.37.1](https://github.com/standardnotes/app/compare/@standardnotes/web@3.37.0...@standardnotes/web@3.37.1) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web
+
+# [3.37.0](https://github.com/standardnotes/app/compare/@standardnotes/web@3.36.0...@standardnotes/web@3.37.0) (2022-07-06)
+
+### Bug Fixes
+
+* deps on weba and mobile ([d380711](https://github.com/standardnotes/app/commit/d38071168ac343a952643647996fca5f1018f2b1))
+
+### Features
+
+* add snjs package ([0e40469](https://github.com/standardnotes/app/commit/0e40469e2fe868b88860f0f2541364696d8f7957))
+
+# [3.36.0](https://github.com/standardnotes/app/compare/@standardnotes/web@3.35.2...@standardnotes/web@3.36.0) (2022-07-06)
+
+### Features
+
+* add sncrypto client side packages ([6ec6679](https://github.com/standardnotes/app/commit/6ec66795d21bdfa5abfa08c3b79b19b5c4cd0449))
+
+## [3.35.2](https://github.com/standardnotes/app/compare/@standardnotes/web@3.35.1...@standardnotes/web@3.35.2) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web
+
+## [3.35.1](https://github.com/standardnotes/app/compare/@standardnotes/web@3.35.0...@standardnotes/web@3.35.1) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web
+
+# [3.35.0](https://github.com/standardnotes/app/compare/@standardnotes/web@3.34.0...@standardnotes/web@3.35.0) (2022-07-05)
+
+### Features
+
+* add services package ([fbfed0a](https://github.com/standardnotes/app/commit/fbfed0a05cd5eb6ec4d5579012971e4495e04a30))
+
+# [3.34.0](https://github.com/standardnotes/app/compare/@standardnotes/web@3.33.8...@standardnotes/web@3.34.0) (2022-07-05)
+
+### Features
+
+* add filepicker package ([d4188a3](https://github.com/standardnotes/app/commit/d4188a3fa2914a48fd28d80d45269a3eb9a358a8))
+
+## [3.33.8](https://github.com/standardnotes/app/compare/@standardnotes/web@3.33.7...@standardnotes/web@3.33.8) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web
+
+## [3.33.7](https://github.com/standardnotes/app/compare/@standardnotes/web@3.33.6...@standardnotes/web@3.33.7) (2022-07-05)
+
+### Bug Fixes
+
+* **web:** content & navigation list scroll on mobile ([#1207](https://github.com/standardnotes/app/issues/1207)) ([37d765a](https://github.com/standardnotes/app/commit/37d765ab218ae50e3fd4705973f7bed06c1f4eb5))
+
+## [3.33.6](https://github.com/standardnotes/app/compare/@standardnotes/web@3.33.5...@standardnotes/web@3.33.6) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web
+
+## [3.33.5](https://github.com/standardnotes/app/compare/@standardnotes/web@3.33.4...@standardnotes/web@3.33.5) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web
+
+## [3.33.4](https://github.com/standardnotes/app/compare/@standardnotes/web@3.33.3...@standardnotes/web@3.33.4) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web
+
+## [3.33.3](https://github.com/standardnotes/app/compare/@standardnotes/web@3.33.2...@standardnotes/web@3.33.3) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web
+
+## [3.33.2](https://github.com/standardnotes/app/compare/@standardnotes/web@3.33.1...@standardnotes/web@3.33.2) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web
+
+## [3.33.1](https://github.com/standardnotes/app/compare/@standardnotes/web@3.33.0...@standardnotes/web@3.33.1) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web
+
+# [3.33.0](https://github.com/standardnotes/app/compare/@standardnotes/web@3.32.0...@standardnotes/web@3.33.0) (2022-07-05)
+
+### Features
+
+* add @standardnotes/encryption package ([#1199](https://github.com/standardnotes/app/issues/1199)) ([e5771fc](https://github.com/standardnotes/app/commit/e5771fcbde827afd178edde3b7bd872734cd3338))
+
+# [3.32.0](https://github.com/standardnotes/app/compare/@standardnotes/web@3.31.1...@standardnotes/web@3.32.0) (2022-07-04)
+
+### Features
+
+* initial implementation of responsive app panes ([#1198](https://github.com/standardnotes/app/issues/1198)) ([21ea2ec](https://github.com/standardnotes/app/commit/21ea2ec7a1391638bf0cfb2661ccb78a186d8d8f))
+
 ## [3.31.1](https://github.com/standardnotes/app/compare/@standardnotes/web@3.31.0...@standardnotes/web@3.31.1) (2022-07-02)
 
 ### Bug Fixes

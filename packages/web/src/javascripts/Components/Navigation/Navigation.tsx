@@ -4,9 +4,12 @@ import { WebApplication } from '@/Application/Application'
 import { PANEL_NAME_NAVIGATION } from '@/Constants/Constants'
 import { ApplicationEvent, PrefKey } from '@standardnotes/snjs'
 import { observer } from 'mobx-react-lite'
-import { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import PanelResizer, { PanelSide, ResizeFinishCallback, PanelResizeType } from '@/Components/PanelResizer/PanelResizer'
 import SearchBar from '@/Components/SearchBar/SearchBar'
+import ResponsivePaneContent from '@/Components/ResponsivePane/ResponsivePaneContent'
+import { AppPaneId } from '@/Components/ResponsivePane/AppPaneMetadata'
+import { classNames } from '@/Utils/ConcatenateClassNames'
 
 type Props = {
   application: WebApplication
@@ -14,7 +17,7 @@ type Props = {
 
 const Navigation: FunctionComponent<Props> = ({ application }) => {
   const viewControllerManager = useMemo(() => application.getViewControllerManager(), [application])
-  const [ref, setRef] = useState<HTMLDivElement | null>()
+  const ref = useRef<HTMLDivElement>(null)
   const [panelWidth, setPanelWidth] = useState<number>(0)
 
   useEffect(() => {
@@ -44,13 +47,8 @@ const Navigation: FunctionComponent<Props> = ({ application }) => {
   }, [viewControllerManager])
 
   return (
-    <div
-      id="navigation"
-      className="sn-component section app-column app-column-first"
-      data-aria-label="Navigation"
-      ref={setRef}
-    >
-      <div id="navigation-content" className="content">
+    <div id="navigation" className="sn-component section app-column app-column-first" ref={ref}>
+      <ResponsivePaneContent paneId={AppPaneId.Navigation} contentElementId="navigation-content">
         <SearchBar
           itemListController={viewControllerManager.itemListController}
           searchOptionsController={viewControllerManager.searchOptionsController}
@@ -62,16 +60,22 @@ const Navigation: FunctionComponent<Props> = ({ application }) => {
             </div>
           </div>
         </div>
-        <div className="scrollable">
+        <div
+          className={classNames(
+            'h-full overflow-y-auto overflow-x-hidden',
+            'md:overflow-y-hidden md:hover:overflow-y-auto',
+            'md:hover:[overflow-y:_overlay]',
+          )}
+        >
           <SmartViewsSection viewControllerManager={viewControllerManager} />
           <TagsSection viewControllerManager={viewControllerManager} />
         </div>
-      </div>
-      {ref && (
+      </ResponsivePaneContent>
+      {ref.current && (
         <PanelResizer
           collapsable={true}
           defaultWidth={150}
-          panel={ref}
+          panel={ref.current}
           hoverable={true}
           side={PanelSide.Right}
           type={PanelResizeType.WidthOnly}

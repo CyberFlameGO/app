@@ -3,6 +3,126 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.82](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.81...@standardnotes/web-server@1.2.82) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.81](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.80...@standardnotes/web-server@1.2.81) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.80](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.79...@standardnotes/web-server@1.2.80) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.79](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.78...@standardnotes/web-server@1.2.79) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.78](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.77...@standardnotes/web-server@1.2.78) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.77](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.76...@standardnotes/web-server@1.2.77) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.76](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.75...@standardnotes/web-server@1.2.76) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.75](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.74...@standardnotes/web-server@1.2.75) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.74](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.73...@standardnotes/web-server@1.2.74) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.73](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.72...@standardnotes/web-server@1.2.73) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.72](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.71...@standardnotes/web-server@1.2.72) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.71](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.70...@standardnotes/web-server@1.2.71) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.70](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.69...@standardnotes/web-server@1.2.70) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.69](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.68...@standardnotes/web-server@1.2.69) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.68](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.67...@standardnotes/web-server@1.2.68) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.67](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.66...@standardnotes/web-server@1.2.67) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.66](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.65...@standardnotes/web-server@1.2.66) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.65](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.64...@standardnotes/web-server@1.2.65) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.64](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.63...@standardnotes/web-server@1.2.64) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.63](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.62...@standardnotes/web-server@1.2.63) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.62](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.61...@standardnotes/web-server@1.2.62) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.61](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.60...@standardnotes/web-server@1.2.61) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.60](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.59...@standardnotes/web-server@1.2.60) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.59](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.58...@standardnotes/web-server@1.2.59) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.58](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.57...@standardnotes/web-server@1.2.58) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.57](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.56...@standardnotes/web-server@1.2.57) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.56](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.55...@standardnotes/web-server@1.2.56) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.55](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.54...@standardnotes/web-server@1.2.55) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.54](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.53...@standardnotes/web-server@1.2.54) (2022-07-04)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
+## [1.2.53](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.52...@standardnotes/web-server@1.2.53) (2022-07-04)
+
+**Note:** Version bump only for package @standardnotes/web-server
+
 ## [1.2.52](https://github.com/standardnotes/app/compare/@standardnotes/web-server@1.2.51...@standardnotes/web-server@1.2.52) (2022-07-02)
 
 **Note:** Version bump only for package @standardnotes/web-server

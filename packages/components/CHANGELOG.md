@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.3](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.7.2...@standardnotes/components-meta@2.7.3) (2022-07-06)
+
+### Bug Fixes
+
+* **advanced checklist:** improve editor styles ([#1221](https://github.com/standardnotes/app/issues/1221)) ([f7ba658](https://github.com/standardnotes/app/commit/f7ba6588a7d062e3ec82e6413042ce5d8cd075f7))
+
+## [2.7.2](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.7.1...@standardnotes/components-meta@2.7.2) (2022-07-06)
+
+### Bug Fixes
+
+* **components:** dynamic panels theme ([d1df0d3](https://github.com/standardnotes/app/commit/d1df0d371a8afc60c17c79f35a1416804eedb9ec))
+
+## [2.7.1](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.7.0...@standardnotes/components-meta@2.7.1) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/components-meta
+
+# [2.7.0](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.6.6...@standardnotes/components-meta@2.7.0) (2022-07-06)
+
+### Features
+
+* add utils package ([aef4ceb](https://github.com/standardnotes/app/commit/aef4ceb7f85948f1f08b8b09a4db5d187daa371b))
+
+## [2.6.6](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.6.5...@standardnotes/components-meta@2.6.6) (2022-07-05)
+
+### Bug Fixes
+
+* **advanced checklist:** remove test for reorder icon ([#1209](https://github.com/standardnotes/app/issues/1209)) ([296aa9a](https://github.com/standardnotes/app/commit/296aa9aab2072d4aad68485c31c000ad2c3bf013))
+
+## [2.6.5](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.6.4...@standardnotes/components-meta@2.6.5) (2022-07-05)
+
+### Bug Fixes
+
+* **advanced checklist:** UI changes ([#1208](https://github.com/standardnotes/app/issues/1208)) ([1ce4cb3](https://github.com/standardnotes/app/commit/1ce4cb3c5c8f4e590fd67fdbd684b36ac6383bd9))
+
+## [2.6.4](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.6.3...@standardnotes/components-meta@2.6.4) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/components-meta
+
+## [2.6.3](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.6.2...@standardnotes/components-meta@2.6.3) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/components-meta
+
+## [2.6.2](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.6.1...@standardnotes/components-meta@2.6.2) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/components-meta
+
+## [2.6.1](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.6.0...@standardnotes/components-meta@2.6.1) (2022-07-05)
+
+**Note:** Version bump only for package @standardnotes/components-meta
+
+# [2.6.0](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.5.10...@standardnotes/components-meta@2.6.0) (2022-07-05)
+
+### Features
+
+* add features package ([44d3e96](https://github.com/standardnotes/app/commit/44d3e9646809e0199b2747ed9a5d31d4e86bca02))
+
+## [2.5.10](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.5.9...@standardnotes/components-meta@2.5.10) (2022-07-04)
+
+### Bug Fixes
+
+* **advanced checklist:** animations and error handling ([#1200](https://github.com/standardnotes/app/issues/1200)) ([a0205a5](https://github.com/standardnotes/app/commit/a0205a5c7dd72184cb575195ced3132091072239))
+
 ## [2.5.9](https://github.com/standardnotes/app/compare/@standardnotes/components-meta@2.5.8...@standardnotes/components-meta@2.5.9) (2022-07-01)
 
 ### Bug Fixes

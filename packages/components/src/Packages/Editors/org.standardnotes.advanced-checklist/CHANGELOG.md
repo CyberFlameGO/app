@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/standardnotes/app/compare/@standardnotes/advanced-checklist@0.2.1...@standardnotes/advanced-checklist@0.2.2) (2022-07-06)
+
+### Bug Fixes
+
+* **advanced checklist:** improve editor styles ([#1221](https://github.com/standardnotes/app/issues/1221)) ([f7ba658](https://github.com/standardnotes/app/commit/f7ba6588a7d062e3ec82e6413042ce5d8cd075f7))
+
+## [0.2.1](https://github.com/standardnotes/app/compare/@standardnotes/advanced-checklist@0.2.0...@standardnotes/advanced-checklist@0.2.1) (2022-07-06)
+
+**Note:** Version bump only for package @standardnotes/advanced-checklist
+
+# [0.2.0](https://github.com/standardnotes/app/compare/@standardnotes/advanced-checklist@0.1.6...@standardnotes/advanced-checklist@0.2.0) (2022-07-06)
+
+### Features
+
+* add utils package ([aef4ceb](https://github.com/standardnotes/app/commit/aef4ceb7f85948f1f08b8b09a4db5d187daa371b))
+
+## [0.1.6](https://github.com/standardnotes/app/compare/@standardnotes/advanced-checklist@0.1.5...@standardnotes/advanced-checklist@0.1.6) (2022-07-05)
+
+### Bug Fixes
+
+* **advanced checklist:** remove test for reorder icon ([#1209](https://github.com/standardnotes/app/issues/1209)) ([296aa9a](https://github.com/standardnotes/app/commit/296aa9aab2072d4aad68485c31c000ad2c3bf013))
+
+## [0.1.5](https://github.com/standardnotes/app/compare/@standardnotes/advanced-checklist@0.1.4...@standardnotes/advanced-checklist@0.1.5) (2022-07-05)
+
+### Bug Fixes
+
+* **advanced checklist:** UI changes ([#1208](https://github.com/standardnotes/app/issues/1208)) ([1ce4cb3](https://github.com/standardnotes/app/commit/1ce4cb3c5c8f4e590fd67fdbd684b36ac6383bd9))
+
+## [0.1.4](https://github.com/standardnotes/app/compare/@standardnotes/advanced-checklist@0.1.3...@standardnotes/advanced-checklist@0.1.4) (2022-07-04)
+
+### Bug Fixes
+
+* **advanced checklist:** animations and error handling ([#1200](https://github.com/standardnotes/app/issues/1200)) ([a0205a5](https://github.com/standardnotes/app/commit/a0205a5c7dd72184cb575195ced3132091072239))
+
 ## [0.1.3](https://github.com/standardnotes/app/compare/@standardnotes/advanced-checklist@0.1.2...@standardnotes/advanced-checklist@0.1.3) (2022-06-30)
 
 ### Bug Fixes

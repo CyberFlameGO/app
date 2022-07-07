@@ -1,8 +1,8 @@
 import { WebApplication } from '@/Application/Application'
 import { parseFileName } from '@standardnotes/filepicker'
 import {
-  ContentType,
   BackupFile,
+  ContentType,
   BackupFileDecryptedContextualPayload,
   NoteContent,
   EncryptedItemInterface,

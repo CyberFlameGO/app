@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import styled from 'styled-components'
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -10,28 +9,21 @@ import TaskSectionList from './TaskSectionList'
 
 import TaskGroupOptions from './TaskGroupOptions'
 
+import { useEffect, useState } from 'react'
 import { CircularProgressBar, GenericInlineText, MainTitle, RoundButton } from '../../common/components'
-import { ChevronDownIcon, ChevronUpIcon, ReorderIcon } from '../../common/components/icons'
+import { ChevronDownIcon, ChevronUpIcon } from '../../common/components/icons'
 
 const TaskGroupContainer = styled.div<{ isLast?: boolean }>`
   background-color: var(--sn-stylekit-background-color);
   border: 1px solid var(--sn-stylekit-border-color);
-  border-radius: 8px;
+  border-radius: 4px;
   box-sizing: border-box;
-  padding: 16px;
+  padding: 16px 18px;
   margin-bottom: ${({ isLast }) => (!isLast ? '9px' : '0px')};
 
   @media only screen and (max-width: 600px) {
     padding: 8px 10px;
   }
-`
-
-type CollapsableContainerProps = {
-  collapsed: boolean
-}
-
-const CollapsableContainer = styled.div<CollapsableContainerProps>`
-  display: ${({ collapsed }) => (collapsed ? 'none' : 'block')};
 `
 
 type TaskGroupProps = {
@@ -69,7 +61,6 @@ const TaskGroup: React.FC<TaskGroupProps> = ({
   const allTasksCompleted = totalTasks > 0 && totalTasks === completedTasks
 
   function handleCollapse() {
-    dispatch(tasksGroupCollapsed({ groupName, type: 'group', collapsed: !collapsed }))
     setCollapsed(!collapsed)
   }
 
@@ -80,6 +71,10 @@ const TaskGroup: React.FC<TaskGroupProps> = ({
     setCollapsed(false)
   }
 
+  useEffect(() => {
+    dispatch(tasksGroupCollapsed({ groupName, type: 'group', collapsed }))
+  }, [collapsed, dispatch, groupName])
+
   return (
     <TaskGroupContainer
       ref={innerRef}
@@ -88,14 +83,9 @@ const TaskGroup: React.FC<TaskGroupProps> = ({
       onTransitionEnd={onTransitionEnd}
       isLast={isLast}
     >
-      <div className="flex items-center justify-between h-8 mt-1 mb-1">
+      <div className="flex items-center justify-between h-8">
         <div className="flex flex-grow items-center" onClick={handleClick}>
-          {canEdit && (
-            <div className="mr-3 pt-1px" {...props}>
-              <ReorderIcon highlight={isDragging} />
-            </div>
-          )}
-          <MainTitle crossed={allTasksCompleted && collapsed} highlight={isDragging}>
+          <MainTitle crossed={allTasksCompleted && collapsed} highlight={isDragging} {...props}>
             {groupName}
           </MainTitle>
           <CircularProgressBar size={18} percentage={percentageCompleted} />
@@ -119,10 +109,12 @@ const TaskGroup: React.FC<TaskGroupProps> = ({
         )}
       </div>
 
-      <CollapsableContainer collapsed={collapsed}>
-        <CreateTask group={group} />
-        <TaskSectionList group={group} />
-      </CollapsableContainer>
+      {!collapsed && (
+        <>
+          <CreateTask group={group} />
+          <TaskSectionList group={group} />
+        </>
+      )}
     </TaskGroupContainer>
   )
 }

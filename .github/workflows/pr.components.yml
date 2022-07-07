@@ -19,20 +19,20 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Build components
+        run: yarn build:components
+
       - name: Lint components
         run: yarn lint
         working-directory: packages/components
-
-      - name: Build components
-        run: yarn build:components
 
       - name: Test components
         run: yarn test
         working-directory: packages/components
 
-      - name: Lint all
-        run: yarn lint
       - name: Build all
         run: yarn build:all
+      - name: Lint all
+        run: yarn lint
       - name: Test all
         run: yarn test

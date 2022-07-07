@@ -23,6 +23,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           registry-url: 'https://registry.npmjs.org'
+          node-version-file: '.nvmrc'
       - run: yarn install
       - run: yarn build:desktop
       - run: echo APP_VERSION=$(node -p "require('./package.json').version") >> $GITHUB_ENV
@@ -57,6 +58,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           registry-url: 'https://registry.npmjs.org'
+          node-version-file: '.nvmrc'
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
       - name: Install FPM
@@ -130,6 +132,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           registry-url: 'https://registry.npmjs.org'
+          node-version-file: '.nvmrc'
       - run: yarn install
       - run: yarn build:desktop
       - run: yarn run webpack --config desktop.webpack.prod.js
@@ -158,6 +161,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           registry-url: 'https://registry.npmjs.org'
+          node-version-file: '.nvmrc'
 
       - run: yarn install
 
@@ -206,4 +210,4 @@ jobs:
           sudo snap install snapcraft --classic
           echo "${{ secrets.SNAPCRAFT_LOGIN_FILE }}" >> snapauth.txt
           snapcraft login --with=snapauth.txt
-          snapcraft upload dist/standard-notes-${{ steps.package-version.outputs.current-version}}-linux-amd64.snap
+          snapcraft upload dist/standard-notes-${{ steps.package-version.outputs.current-version}}-linux-amd64.snap --release stable,candidate,beta,edge

@@ -12,6 +12,7 @@ import { SelectedItemsController } from '@/Controllers/SelectedItemsController'
 import { NavigationController } from '@/Controllers/Navigation/NavigationController'
 import { NotesController } from '@/Controllers/NotesController'
 import { ElementIds } from '@/Constants/ElementIDs'
+import { classNames } from '@/Utils/ConcatenateClassNames'
 
 type Props = {
   application: WebApplication
@@ -36,7 +37,7 @@ const ContentList: FunctionComponent<Props> = ({
   selectedItems,
   paginate,
 }) => {
-  const { selectPreviousItem, selectNextItem } = itemListController
+  const { selectPreviousItem, selectNextItem } = selectionController
   const { hideTags, hideDate, hideNotePreview, hideEditorIcon } = itemListController.webDisplayOptions
   const { sortBy } = itemListController.displayOptions
 
@@ -66,7 +67,11 @@ const ContentList: FunctionComponent<Props> = ({
 
   return (
     <div
-      className="infinite-scroll focus:shadow-none focus:outline-none"
+      className={classNames(
+        'infinite-scroll overflow-y-auto overflow-x-hidden focus:shadow-none focus:outline-none',
+        'md:overflow-y-hidden md:hover:overflow-y-auto',
+        'md:hover:[overflow-y:_overlay]',
+      )}
       id={ElementIds.ContentList}
       onScroll={onScroll}
       onKeyDown={onKeyDown}
