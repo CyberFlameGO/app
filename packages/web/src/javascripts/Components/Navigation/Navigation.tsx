@@ -10,15 +10,34 @@ import SearchBar from '@/Components/SearchBar/SearchBar'
 import ResponsivePaneContent from '@/Components/ResponsivePane/ResponsivePaneContent'
 import { AppPaneId } from '@/Components/ResponsivePane/AppPaneMetadata'
 import { classNames } from '@/Utils/ConcatenateClassNames'
+import styled from 'styled-components'
 
 type Props = {
   application: WebApplication
 }
 
+const ItemsColumnStyled = styled.div<{ left?: any; width?: any }>`
+  left: ${(props) => (props.left !== undefined ? props.left : 'unset')};
+  width: ${(props) => (props.width !== undefined ? `${props.width}px` : 'unset')};
+`
+
 const Navigation: FunctionComponent<Props> = ({ application }) => {
   const viewControllerManager = useMemo(() => application.getViewControllerManager(), [application])
   const ref = useRef<HTMLDivElement>(null)
   const [panelWidth, setPanelWidth] = useState<number>(0)
+
+  const [resizerWidth, setResizerWidth] = useState(panelWidth)
+
+  const handleResizerWidthUpdate = (newWidth: any) => {
+    const numericWidth = parseInt(newWidth)
+    if (Number.isNaN(numericWidth)) {
+      // setResizerWidth('unset')
+      // setPanelWidth('unset')
+    } else {
+      // setResizerWidth(numericWidth)
+      // setPanelWidth(numericWidth)
+    }
+  }
 
   useEffect(() => {
     const removeObserver = application.addEventObserver(async () => {
@@ -47,7 +66,14 @@ const Navigation: FunctionComponent<Props> = ({ application }) => {
   }, [viewControllerManager])
 
   return (
-    <div id="navigation" className="sn-component section app-column app-column-first" ref={ref}>
+    // <div id="navigation" className="sn-component section app-column app-column-first" ref={ref}>
+    <ItemsColumnStyled
+      id="navigation"
+      className="sn-component section app-column app-column-first"
+      ref={ref}
+      // width={resizerWidth}
+      // width={panelWidth}
+    >
       <ResponsivePaneContent paneId={AppPaneId.Navigation} contentElementId="navigation-content">
         <SearchBar
           itemListController={viewControllerManager.itemListController}
@@ -83,10 +109,17 @@ const Navigation: FunctionComponent<Props> = ({ application }) => {
           resizeFinishCallback={panelResizeFinishCallback}
           widthEventCallback={panelWidthEventCallback}
           width={panelWidth}
+          // width={resizerWidth}
           left={0}
+          // updateWidth={(newWidth) => handleResizerWidthUpdate(newWidth)}
+          updateWidth={(newWidth) => {
+            handleResizerWidthUpdate(newWidth);
+            panelWidthEventCallback()
+          }}
+          updateLeft={() => {}}
         />
       )}
-    </div>
+    </ItemsColumnStyled>
   )
 }
 

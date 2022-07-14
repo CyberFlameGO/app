@@ -3,7 +3,7 @@ import { WebApplication } from '@/Application/Application'
 import { PANEL_NAME_NOTES } from '@/Constants/Constants'
 import { PrefKey, SystemViewId } from '@standardnotes/snjs'
 import { observer } from 'mobx-react-lite'
-import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import ContentList from '@/Components/ContentListView/ContentList'
 import NoAccountWarning from '@/Components/NoAccountWarning/NoAccountWarning'
 import PanelResizer, { PanelSide, ResizeFinishCallback, PanelResizeType } from '@/Components/PanelResizer/PanelResizer'
@@ -20,6 +20,7 @@ import ContentListHeader from './Header/ContentListHeader'
 import ResponsivePaneContent from '../ResponsivePane/ResponsivePaneContent'
 import { AppPaneId } from '../ResponsivePane/AppPaneMetadata'
 import { useResponsiveAppPane } from '../ResponsivePane/ResponsivePaneProvider'
+import styled from 'styled-components'
 
 type Props = {
   accountMenuController: AccountMenuController
@@ -32,6 +33,19 @@ type Props = {
   notesController: NotesController
   selectionController: SelectedItemsController
 }
+
+const ItemsColumnStyled = styled.div<{ left?: React.CSSProperties['left']; width?: React.CSSProperties['width'] }>`
+  left: ${(props) => (props.left !== undefined ? props.left : 'unset')};
+  width: ${(props) => {
+    if (props.width === undefined) {
+      return 'unset'
+    }
+    if (typeof props.width === 'number') {
+      return `${props.width}px`
+    }
+    return props.width
+  }};
+`
 
 const ContentListView: FunctionComponent<Props> = ({
   accountMenuController,
@@ -58,6 +72,17 @@ const ContentListView: FunctionComponent<Props> = ({
     renderedItems,
     searchBarElement,
   } = itemListController
+
+  const [resizerWidth, setResizerWidth] = useState<React.CSSProperties['width']>(panelWidth)
+
+  useEffect(() => {
+    setResizerWidth(panelWidth)
+  }, [panelWidth])
+
+  // TODO: fix `any`
+  const handleResizerWidthUpdate = (newWidth: React.CSSProperties['width']) => {
+    setResizerWidth(newWidth)
+  }
 
   const { selectedItems, selectNextItem, selectPreviousItem } = selectionController
 
@@ -168,13 +193,13 @@ const ContentListView: FunctionComponent<Props> = ({
     () => (isFilesSmartView ? 'Upload file' : 'Create a new note in the selected tag'),
     [isFilesSmartView],
   )
-
   return (
-    <div
+    <ItemsColumnStyled
       id="items-column"
       className="sn-component section app-column app-column-second flex flex-col border-b border-solid border-border"
       aria-label={'Notes & Files'}
       ref={itemsViewPanelRef}
+      width={resizerWidth}
     >
       <ResponsivePaneContent paneId={AppPaneId.Items}>
         <div id="items-title-bar" className="section-title-bar border-b border-solid border-border">
@@ -209,6 +234,7 @@ const ContentListView: FunctionComponent<Props> = ({
           />
         ) : null}
       </ResponsivePaneContent>
+      {/* TODO: seems we don't need to update left in `PanelResizer` here (i.e. - implement `updateLeft`, since it's always 0 - so perhaps make `updateLeft` optional */}
       {itemsViewPanelRef.current && (
         <PanelResizer
           collapsable={true}
@@ -219,11 +245,14 @@ const ContentListView: FunctionComponent<Props> = ({
           type={PanelResizeType.WidthOnly}
           resizeFinishCallback={panelResizeFinishCallback}
           widthEventCallback={panelWidthEventCallback}
-          width={panelWidth}
+          // width={panelWidth}
+          width={resizerWidth}
           left={0}
+          updateWidth={(newWidth) => handleResizerWidthUpdate(newWidth)}
+          updateLeft={() => {}}
         />
       )}
-    </div>
+    </ItemsColumnStyled>
   )
 }
 

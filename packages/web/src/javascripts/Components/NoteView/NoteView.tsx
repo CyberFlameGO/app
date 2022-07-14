@@ -1,4 +1,4 @@
-import { ChangeEventHandler, createRef, KeyboardEventHandler, RefObject } from 'react'
+import { ChangeEventHandler, createRef, KeyboardEventHandler, RefObject, useState } from 'react'
 import {
   ApplicationEvent,
   isPayloadSourceRetrieved,
@@ -37,6 +37,7 @@ import { reloadFont } from './FontFunctions'
 import { NoteViewProps } from './NoteViewProps'
 import { WebAppEvent } from '@/Application/WebAppEvent'
 import IndicatorCircle from '../IndicatorCircle/IndicatorCircle'
+import styled from 'styled-components'
 
 const MINIMUM_STATUS_DURATION = 400
 const TEXTAREA_DEBOUNCE = 100
@@ -50,6 +51,12 @@ type NoteStatus = {
 function sortAlphabetically(array: SNComponent[]): SNComponent[] {
   return array.sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1))
 }
+
+const ItemsColumnStyled = styled.div<{ left?: any }>`
+  left: ${(props) => {
+    return props.left !== undefined ? `${props.left}px` : 'unset'
+  }};
+`
 
 type State = {
   availableStackComponents: SNComponent[]
@@ -78,6 +85,8 @@ type State = {
   leftResizerOffset: number
   rightResizerWidth: number
   rightResizerOffset: number
+
+  resizerLeft: any // TODO no `any`
 }
 
 class NoteView extends PureComponent<NoteViewProps, State> {
@@ -130,6 +139,8 @@ class NoteView extends PureComponent<NoteViewProps, State> {
       leftResizerOffset: 0,
       rightResizerWidth: 0,
       rightResizerOffset: 0,
+      // TODO: find better name
+      resizerLeft: 'unset',
     }
 
     this.editorContentRef = createRef<HTMLDivElement>()
@@ -654,6 +665,51 @@ class NoteView extends PureComponent<NoteViewProps, State> {
     this.application.sync.sync().catch(console.error)
   }
 
+  //  TODO: no `any`
+  onResizerLeftUpdate = (left: any) => {
+    console.log('setting `left` to  ', left)
+    // this.setState({ resizerLeft: left })
+    // TODO: probably I should use `leftResizerOffset` and remove `resizerLeft` at all
+    // this.setState({ resizerLeft: left, leftResizerOffset: left })
+
+    this.setState({ leftResizerOffset: left })
+    /*setTimeout(() => {
+      this.setState({ leftResizerOffset: left })
+    }, 10)*/
+  }
+
+  onResizerRightUpdate = (left: any) => {
+    // TODO: probably I should use `leftResizerOffset` and remove `resizerLeft` at all
+    this.setState({ rightResizerOffset: left })
+  }
+
+  handleRightResizerWidthUpdate = (newWidth: any) => {
+    const numericWidth = parseInt(newWidth);
+    if (Number.isNaN(numericWidth)) {
+      this.setState({
+        rightResizerWidth: 'unset'
+        // rightResizerWidth: 0
+      })
+    } else {
+      this.setState({
+        rightResizerWidth: numericWidth
+      })
+    }
+  }
+
+  handleLeftResizerWidthUpdate = (newWidth: any) => {
+    const numericWidth = parseInt(newWidth);
+    if (Number.isNaN(numericWidth)) {
+      this.setState({
+        leftResizerWidth: 'unset'
+      })
+    } else {
+      this.setState({
+        leftResizerWidth: numericWidth
+      })
+    }
+  }
+
   async reloadSpellcheck() {
     const spellcheck = this.viewControllerManager.notesController.getSpellcheckStateForNote(this.note)
 
@@ -981,10 +1037,11 @@ class NoteView extends PureComponent<NoteViewProps, State> {
             </div>
           )}
 
-          <div
+          <ItemsColumnStyled
             id={ElementIds.EditorContent}
             className={`${ElementIds.EditorContent} z-editor-content`}
             ref={this.editorContentRef}
+            left={parseInt(this.state.leftResizerOffset)}
           >
             {this.state.marginResizersEnabled && this.editorContentRef.current ? (
               <PanelResizer
@@ -994,9 +1051,11 @@ class NoteView extends PureComponent<NoteViewProps, State> {
                 panel={this.editorContentRef.current}
                 side={PanelSide.Left}
                 type={PanelResizeType.OffsetAndWidth}
-                left={this.state.leftResizerOffset}
+                left={parseInt(String(this.state.leftResizerOffset))}
                 width={this.state.leftResizerWidth}
                 resizeFinishCallback={this.onPanelResizeFinish}
+                updateLeft={(newLeft) => this.onResizerLeftUpdate(newLeft)}
+                updateWidth={(newLeft) => this.handleLeftResizerWidthUpdate(newLeft)}
               />
             ) : null}
 
@@ -1035,12 +1094,15 @@ class NoteView extends PureComponent<NoteViewProps, State> {
                 panel={this.editorContentRef.current}
                 side={PanelSide.Right}
                 type={PanelResizeType.OffsetAndWidth}
-                left={this.state.rightResizerOffset}
+                // left={this.state.rightResizerOffset}
+                left={parseInt(this.state.rightResizerOffset)}
                 width={this.state.rightResizerWidth}
                 resizeFinishCallback={this.onPanelResizeFinish}
+                updateLeft={(newLeft) => this.onResizerRightUpdate(newLeft)}
+                updateWidth={(newWidth) => this.handleRightResizerWidthUpdate(newWidth)}
               />
             ) : null}
-          </div>
+          </ItemsColumnStyled>
 
           <div id="editor-pane-component-stack">
             {this.state.availableStackComponents.length > 0 && (

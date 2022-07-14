@@ -32,6 +32,8 @@ type Props = {
   type: PanelResizeType
   resizeFinishCallback?: ResizeFinishCallback
   widthEventCallback?: () => void
+  updateLeft: (newLeft: React.CSSProperties['left']) => void
+  updateWidth: (newWidth: React.CSSProperties['width']) => void
 }
 
 type State = {
@@ -152,12 +154,15 @@ class PanelResizer extends Component<Props, State> {
     const isFullWidth = Math.round(width + this.lastLeft) === Math.round(parentRect.width)
     if (isFullWidth) {
       if (this.props.type === PanelResizeType.WidthOnly) {
-        this.props.panel.style.removeProperty('width')
+        // this.props.panel.style.removeProperty('width')
+        this.props.updateWidth('unset')
       } else {
-        this.props.panel.style.width = `calc(100% - ${this.lastLeft}px)`
+        // this.props.panel.style.width = `calc(100% - ${this.lastLeft}px)`
+        this.props.updateWidth(`calc(100% - ${this.lastLeft}px)`)
       }
     } else {
-      this.props.panel.style.width = width + 'px'
+      // this.props.panel.style.width = width + 'px'
+      this.props.updateWidth(typeof width === 'number' ? width + 'px' : width)
     }
     this.lastWidth = width
     if (finish) {
@@ -169,7 +174,8 @@ class PanelResizer extends Component<Props, State> {
   }
 
   setLeft = (left: number) => {
-    this.props.panel.style.left = left + 'px'
+    // this.props.panel.style.left = left + 'px'
+    this.props.updateLeft(left + 'px')
     this.lastLeft = left
   }
 
@@ -225,6 +231,7 @@ class PanelResizer extends Component<Props, State> {
       newLeft = parentRect.width - newWidth
     }
     this.setLeft(newLeft)
+    // this.props.updateLeft(newLeft)
     this.setWidth(newWidth, false)
   }
 
