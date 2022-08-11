@@ -107,6 +107,7 @@ if (IsWebPlatform) {
   const ReactNativeWebViewInitializationTimeout = 0
 
   setTimeout(() => {
+    alert('window.reactNativeDevice (in Web, timeout) is : ' + window.reactNativeDevice)
     const device = window.reactNativeDevice || new WebDevice(WebAppVersion)
     startApplication(window.defaultSyncServer, device, window.enabledUnfinishedFeatures, window.websocketUrl).catch(
       console.error,

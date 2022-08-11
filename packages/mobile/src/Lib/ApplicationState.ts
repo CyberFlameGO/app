@@ -167,6 +167,7 @@ export class ApplicationState extends ApplicationService {
       this.notifyOfStateChange(AppStateType.PreferencesChanged)
     })
 
+    console.log('in AppStart, calling it...');
     await this.loadUnlockTiming()
   }
 

@@ -72,7 +72,17 @@ const ApplicationView: FunctionComponent<Props> = ({ application, mainApplicatio
   )
 
   const onAppStart = useCallback(() => {
-    setNeedsUnlock(application.hasPasscode())
+    // setNeedsUnlock(application.hasPasscode())
+    // alert('application.isWebMobileApp is : ' + application.isWebMobileApp)
+    if (application.isWebMobileApp()) {
+      alert('yes, its WebMobileApp')
+      // TODO: seems this is the place when we should check (and show) protections on mobile if enabled
+      // TODO: (2) check if this works correctly if the device has biometrics support, but biometrics are not enabled - in that case we shouldn't request bio
+      // setNeedsUnlock(application.hasBiometrics())
+    } else {
+      alert('its Not WebMobileApp')
+      setNeedsUnlock(application.hasPasscode())
+    }
   }, [application])
 
   const handleDemoSignInFromParams = useCallback(() => {

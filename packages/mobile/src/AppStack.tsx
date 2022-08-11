@@ -26,7 +26,8 @@ import { ApplicationContext } from './ApplicationContext'
 import { MobileWebAppContainer } from './MobileWebAppContainer'
 import { ModalStackNavigationProp } from './ModalStack'
 
-const IS_DEBUGGING_WEB_APP = false
+// const IS_DEBUGGING_WEB_APP = false
+const IS_DEBUGGING_WEB_APP = true
 const DEFAULT_TO_WEB_APP = IsDev && IS_DEBUGGING_WEB_APP
 
 export type AppStackNavigatorParamList = {

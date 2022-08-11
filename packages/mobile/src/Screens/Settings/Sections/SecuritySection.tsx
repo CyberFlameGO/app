@@ -124,7 +124,7 @@ export const SecuritySection = (props: Props) => {
     : `Enable ${screenshotPrivacyFeatureText}`
 
   const passcodeTitle = props.hasPasscode ? 'Disable Passcode Lock' : 'Enable Passcode Lock'
-
+console.log('hasBiometrics: ', hasBiometrics);
   const biometricTitle = hasBiometrics ? 'Disable Biometrics Lock' : 'Enable Biometrics Lock'
 
   const setBiometricsTiming = async (timing: UnlockTiming) => {

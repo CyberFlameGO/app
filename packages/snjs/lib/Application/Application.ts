@@ -9,44 +9,44 @@ import {
 } from '@standardnotes/api'
 import * as Common from '@standardnotes/common'
 import * as ExternalServices from '@standardnotes/services'
-import * as Models from '@standardnotes/models'
-import * as Responses from '@standardnotes/responses'
-import * as InternalServices from '../Services'
-import * as Utils from '@standardnotes/utils'
-import * as Settings from '@standardnotes/settings'
-import { Subscription } from '@standardnotes/security'
-import { UuidString, ApplicationEventPayload } from '../Types'
-import { applicationEventForSyncEvent } from '@Lib/Application/Event'
 import {
+  AppGroupManagedApplication,
   ApplicationEvent,
   ApplicationEventCallback,
-  ChallengeValidation,
-  ComponentManagerInterface,
-  DiagnosticInfo,
-  Environment,
-  isDesktopDevice,
-  Platform,
-  ChallengeValue,
-  StorageKey,
+  ApplicationInterface,
   ChallengeReason,
+  ChallengeValidation,
+  ChallengeValue,
+  ComponentManagerInterface,
   DeinitMode,
   DeinitSource,
-  AppGroupManagedApplication,
-  ApplicationInterface,
+  DiagnosticInfo,
   EncryptionService,
   EncryptionServiceEvent,
+  Environment,
   FilesBackupService,
   FileService,
+  isDesktopDevice,
+  Platform,
+  StorageKey,
 } from '@standardnotes/services'
+import * as Models from '@standardnotes/models'
+import { BackupFile, DecryptedItemInterface, EncryptedItemInterface, ItemStream } from '@standardnotes/models'
+import * as Responses from '@standardnotes/responses'
+import { ClientDisplayableError } from '@standardnotes/responses'
+import * as InternalServices from '../Services'
+import { Challenge, ChallengeResponse, UnlockTiming } from '../Services'
+import * as Utils from '@standardnotes/utils'
+import { useBoolean } from '@standardnotes/utils'
+import * as Settings from '@standardnotes/settings'
+import { Subscription } from '@standardnotes/security'
+import { ApplicationEventPayload, UuidString } from '../Types'
+import { applicationEventForSyncEvent } from '@Lib/Application/Event'
 import { FilesClientInterface } from '@standardnotes/files'
 import { ComputePrivateWorkspaceIdentifier } from '@standardnotes/encryption'
-import { useBoolean } from '@standardnotes/utils'
-import { BackupFile, DecryptedItemInterface, EncryptedItemInterface, ItemStream } from '@standardnotes/models'
-import { ClientDisplayableError } from '@standardnotes/responses'
 
 import { SnjsVersion } from './../Version'
 import { SNLog } from '../Log'
-import { Challenge, ChallengeResponse } from '../Services'
 import { ApplicationConstructorOptions, FullyResolvedApplicationOptions } from './Options/ApplicationOptions'
 import { ApplicationOptionsDefaults } from './Options/Defaults'
 
@@ -907,6 +907,22 @@ export class SNApplication
     const MaximumWaitTime = 500
     await this.prepareForDeinit(MaximumWaitTime)
     return this.deinit(this.getDeinitMode(), DeinitSource.Lock)
+  }
+
+  async setBiometricsTiming(timing: UnlockTiming) {
+    return this.protectionService.setBiometricsTiming(timing)
+  }
+
+  async loadMobileUnlockTiming() {
+    return this.protectionService.loadMobileUnlockTiming()
+  }
+
+  getBiometricsTimingOptions() {
+    return this.protectionService.getBiometricsTimingOptions()
+  }
+
+  isWebMobileApp() {
+    return this.environment === Environment.NativeMobileWeb
   }
 
   getDeinitMode(): DeinitMode {

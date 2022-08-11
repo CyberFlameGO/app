@@ -24,6 +24,11 @@ export enum ProtectionEvent {
   UnprotectedSessionExpired = 'UnprotectedSessionExpired',
 }
 
+export enum UnlockTiming {
+  Immediately = 'immediately',
+  OnQuit = 'on-quit',
+}
+
 export const ProposedSecondsToDeferUILevelSessionExpirationDuringActiveInteraction = 30
 
 export enum UnprotectedAccessSecondsDuration {
@@ -63,6 +68,8 @@ export const ProtectionSessionDurations = [
  */
 export class SNProtectionService extends AbstractService<ProtectionEvent> implements ProtectionsClientInterface {
   private sessionExpiryTimeout = -1
+  private mobilePasscodeTiming: UnlockTiming | undefined = UnlockTiming.Immediately // TODO: just an initial value, check if doesn't introduce any issue
+  private mobileBiometricsTiming: UnlockTiming | undefined = UnlockTiming.Immediately // TODO: just an initial value, check if doesn't introduce any issue
 
   constructor(
     private protocolService: EncryptionService,
@@ -222,6 +229,74 @@ export class SNProtectionService extends AbstractService<ProtectionEvent> implem
       requireAccountPassword,
       fallBackToAccountPassword,
     })
+  }
+
+  getPasscodeTimingOptions() {
+    return [
+      {
+        title: 'Immediately',
+        key: UnlockTiming.Immediately,
+        selected: this.mobilePasscodeTiming === UnlockTiming.Immediately,
+      },
+      {
+        title: 'On Quit',
+        key: UnlockTiming.OnQuit,
+        selected: this.mobilePasscodeTiming === UnlockTiming.OnQuit,
+      },
+    ]
+  }
+
+  getBiometricsTimingOptions() {
+    return [
+      {
+        title: 'Immediately',
+        key: UnlockTiming.Immediately,
+        selected: this.mobileBiometricsTiming === UnlockTiming.Immediately,
+      },
+      {
+        title: 'On Quit',
+        key: UnlockTiming.OnQuit,
+        selected: this.mobileBiometricsTiming === UnlockTiming.OnQuit,
+      },
+    ]
+  }
+
+  private async getBiometricsTiming(): Promise<UnlockTiming | undefined> {
+    /*return this.storageService.getValue(StorageKey.MobileBiometricsTiming, StorageValueModes.Nonwrapped) as Promise<
+      UnlockTiming | undefined
+    >*/
+    return this.storageService.getValue<Promise<UnlockTiming | undefined>>(
+      StorageKey.MobileBiometricsTiming,
+      StorageValueModes.Nonwrapped,
+    )
+  }
+
+  private async getPasscodeTiming(): Promise<UnlockTiming | undefined> {
+    return this.storageService.getValue<Promise<UnlockTiming | undefined>>(
+      StorageKey.MobilePasscodeTiming,
+      StorageValueModes.Nonwrapped,
+    )
+  }
+
+  async setBiometricsTiming(timing: UnlockTiming) {
+    await this.storageService.setValue(StorageKey.MobileBiometricsTiming, timing, StorageValueModes.Nonwrapped)
+    this.mobileBiometricsTiming = timing
+  }
+
+  // private async loadUnlockTiming() {
+  // TODO: Important: this function is called in `onAppStart()` in mobile/ApplicationState, need to do the same here
+  async loadMobileUnlockTiming() {
+    /*this.passcodeTiming = await this.getPasscodeTiming()
+    this.biometricsTiming = await this.getBiometricsTiming()*/
+
+    this.mobilePasscodeTiming = await this.getPasscodeTiming()
+    this.mobileBiometricsTiming = await this.getBiometricsTiming()
+    alert(
+      'mobilePasscodeTiming is ' +
+        this.mobilePasscodeTiming +
+        ', mobileBiometricsTiming is: ' +
+        this.mobileBiometricsTiming,
+    )
   }
 
   private async validateOrRenewSession(

@@ -37,9 +37,12 @@ export const MobileWebAppContainer = () => {
   class WebProcessDeviceInterface {
     constructor(messageSender) {
       this.appVersion = '1.2.3'
-      this.environment = 1
+      // this.environment = 1
+      this.environment = 4
       this.databases = []
       this.messageSender = messageSender
+      
+      alert("in custom constructor... " + this.environment)
     }
 
     setApplication() {}
@@ -96,6 +99,7 @@ export const MobileWebAppContainer = () => {
 
   const messageSender = new WebProcessMessageSender();
   window.reactNativeDevice = new WebProcessDeviceInterface(messageSender);
+  alert('window.reactNativeDevice (in mobile injected) is: ' + window.reactNativeDevice);
 
   true;
     `
