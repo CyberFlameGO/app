@@ -183,20 +183,26 @@ export const TagsListItem: FunctionComponent<Props> = observer(
 
     const readyToDrop = isOver && canDrop
 
-    const toggleContextMenu = useCallback(() => {
-      if (!menuButtonRef.current) {
-        return
-      }
+    const toggleContextMenu: MouseEventHandler<HTMLAnchorElement> = useCallback(
+      (event) => {
+        event.preventDefault()
+        event.stopPropagation()
 
-      const contextMenuOpen = tagsState.contextMenuOpen
-      const menuButtonRect = menuButtonRef.current?.getBoundingClientRect()
+        if (!menuButtonRef.current) {
+          return
+        }
 
-      if (contextMenuOpen) {
-        tagsState.setContextMenuOpen(false)
-      } else {
-        onContextMenu(tag, menuButtonRect.right, menuButtonRect.top)
-      }
-    }, [onContextMenu, tagsState, tag])
+        const contextMenuOpen = tagsState.contextMenuOpen
+        const menuButtonRect = menuButtonRef.current?.getBoundingClientRect()
+
+        if (contextMenuOpen) {
+          tagsState.setContextMenuOpen(false)
+        } else {
+          onContextMenu(tag, menuButtonRect.right, menuButtonRect.top)
+        }
+      },
+      [onContextMenu, tagsState, tag],
+    )
 
     return (
       <>
@@ -236,21 +242,31 @@ export const TagsListItem: FunctionComponent<Props> = observer(
             >
               <Icon type="hashtag" className={`${isSelected ? 'text-info' : 'text-neutral'}`} />
             </div>
-            <input
-              className={classNames(
-                'title focus:shadow-none focus:outline-none',
-                isEditing ? 'editing' : '',
-                isCollapsed ? 'md-only:!w-min lg-only:!w-min' : '',
-              )}
-              id={`react-tag-${tag.uuid}`}
-              disabled={!isEditing}
-              onBlur={onBlur}
-              onInput={onInput}
-              value={title}
-              onKeyDown={onKeyDown}
-              spellCheck={false}
-              ref={inputRef}
-            />
+            {isEditing ? (
+              <input
+                className={classNames(
+                  'title editing focus:shadow-none focus:outline-none',
+                  isCollapsed ? 'md-only:!w-min lg-only:!w-min' : '',
+                )}
+                id={`react-tag-${tag.uuid}`}
+                onBlur={onBlur}
+                onInput={onInput}
+                value={title}
+                onKeyDown={onKeyDown}
+                spellCheck={false}
+                ref={inputRef}
+              />
+            ) : (
+              <div
+                className={classNames(
+                  'title overflow-hidden text-left focus:shadow-none focus:outline-none',
+                  isCollapsed ? 'md-only:!w-min lg-only:!w-min' : '',
+                )}
+                id={`react-tag-${tag.uuid}`}
+              >
+                {title}
+              </div>
+            )}
             <div className="flex items-center">
               <a
                 role="button"
