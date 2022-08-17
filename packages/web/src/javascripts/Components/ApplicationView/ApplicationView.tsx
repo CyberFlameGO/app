@@ -204,6 +204,7 @@ const ApplicationView: FunctionComponent<Props> = ({ application, mainApplicatio
                 noteTagsController={viewControllerManager.noteTagsController}
                 notesController={viewControllerManager.notesController}
                 selectionController={viewControllerManager.selectionController}
+                searchOptionsController={viewControllerManager.searchOptionsController}
               />
               <NoteGroupView application={application} />
             </ResponsivePaneProvider>
