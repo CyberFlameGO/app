@@ -10,10 +10,25 @@ export const MobileWebAppContainer = () => {
   const device = useMemo(() => new MobileDeviceInterface(), [])
   const functions = Object.getOwnPropertyNames(Object.getPrototypeOf(device))
 
+  const mobileDeviceInterfaceFunctions = Object.getOwnPropertyNames(MobileDeviceInterface.prototype)
+
   const baselineFunctions: Record<string, any> = {
-    isDeviceDestroyed: `(){
+    /* isDeviceDestroyed: `(){
       return false
-    }`,
+    }`, */
+  }
+
+  for (const functionName of mobileDeviceInterfaceFunctions) {
+    if (functionName === 'constructor') {
+      continue
+    }
+
+    // TODO: put correct type
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const stringifiedFunction = MobileDeviceInterface.prototype[functionName].toString();
+
+    baselineFunctions[functionName] = stringifiedFunction.slice(stringifiedFunction.indexOf('('))
   }
 
   let stringFunctions = ''
@@ -41,8 +56,6 @@ export const MobileWebAppContainer = () => {
       this.environment = 4
       this.databases = []
       this.messageSender = messageSender
-      
-      alert("in custom constructor... " + this.environment)
     }
 
     setApplication() {}
@@ -99,7 +112,7 @@ export const MobileWebAppContainer = () => {
 
   const messageSender = new WebProcessMessageSender();
   window.reactNativeDevice = new WebProcessDeviceInterface(messageSender);
-  alert('window.reactNativeDevice (in mobile injected) is: ' + window.reactNativeDevice);
+  console.log('in mobile, window.reactNativeDevice is: ', window.reactNativeDevice);
 
   true;
     `

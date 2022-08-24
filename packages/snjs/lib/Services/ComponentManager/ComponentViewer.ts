@@ -163,6 +163,10 @@ export class ComponentViewer implements ComponentViewerInterface {
     return this.environment === Environment.Mobile
   }
 
+  get isNativeMobileWeb() {
+    return this.environment === Environment.NativeMobileWeb
+  }
+
   public destroy(): void {
     this.log('Destroying', this)
     this.deinit()

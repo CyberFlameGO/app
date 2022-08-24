@@ -10,7 +10,6 @@ import Protections from './Protections'
 import ErroredItems from './ErroredItems'
 import PreferencesPane from '@/Components/Preferences/PreferencesComponents/PreferencesPane'
 import BiometricsLock from '@/Components/Preferences/Panes/Security/BiometricsLock'
-import { Environment } from '@standardnotes/services'
 
 interface SecurityProps extends MfaProps {
   viewControllerManager: ViewControllerManager
@@ -28,8 +27,7 @@ const Security: FunctionComponent<SecurityProps> = (props) => {
       <Protections application={props.application} />
       <TwoFactorAuthWrapper mfaProvider={props.mfaProvider} userProvider={props.userProvider} />
       <PasscodeLock viewControllerManager={props.viewControllerManager} application={props.application} />
-      {/* TODO: change the condition below to show only if it IS in NativeMobileWeb */}
-      {props.application.environment === Environment.NativeMobileWeb && (
+      {props.application.isNativeMobileWeb() && (
         <BiometricsLock application={props.application} />
       )}
       {props.application.getUser() && <Privacy application={props.application} />}

@@ -921,7 +921,7 @@ export class SNApplication
     return this.protectionService.getBiometricsTimingOptions()
   }
 
-  isWebMobileApp() {
+  isNativeMobileWeb() {
     return this.environment === Environment.NativeMobileWeb
   }
 
