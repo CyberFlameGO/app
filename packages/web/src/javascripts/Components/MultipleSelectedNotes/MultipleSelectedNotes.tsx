@@ -31,7 +31,7 @@ const MultipleSelectedNotes = ({
   const count = notesController.selectedNotesCount
 
   const cancelMultipleSelection = useCallback(() => {
-    selectionController.cancelMultipleSelection()
+    selectionController.cancelMultipleSelection(true)
   }, [selectionController])
 
   return (

@@ -189,7 +189,7 @@ const ContentListView: FunctionComponent<Props> = ({
         }
 
         event.preventDefault()
-        selectionController.selectAll()
+        selectionController.selectAll(true)
       },
     })
 

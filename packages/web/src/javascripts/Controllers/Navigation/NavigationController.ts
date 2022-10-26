@@ -45,7 +45,7 @@ export class NavigationController
   editing_: SNTag | SmartView | undefined
   editingFrom?: TagListSectionType
   addingSubtagTo: SNTag | undefined
-  lastTagChangeWasUserTriggered = false
+  currentTagChangeWasUserTriggered = false
 
   contextMenuOpen = false
   contextMenuOpenFrom?: TagListSectionType
@@ -134,7 +134,7 @@ export class NavigationController
             FindItem(changed, currentSelectedTag.uuid) || FindItem(this.smartViews, currentSelectedTag.uuid)
           if (updatedReference) {
             const wasUserTriggered =
-              this.lastTagChangeWasUserTriggered && updatedReference.uuid === currentSelectedTag.uuid
+              this.currentTagChangeWasUserTriggered && updatedReference.uuid === currentSelectedTag.uuid
             this.setSelectedTagInstance(updatedReference as AnyTag, wasUserTriggered)
           }
 
@@ -193,7 +193,7 @@ export class NavigationController
       void this.selectHomeNavigationView(false)
       return
     }
-    if (state.selectedTagUuid && !this.lastTagChangeWasUserTriggered) {
+    if (state.selectedTagUuid && !this.currentTagChangeWasUserTriggered) {
       this.findAndSetTag(state.selectedTagUuid)
     }
   }
@@ -470,7 +470,7 @@ export class NavigationController
     runInAction(() => {
       this.selected_ = tag
       this.selectedUuid = tag ? tag.uuid : undefined
-      this.lastTagChangeWasUserTriggered = userTriggered
+      this.currentTagChangeWasUserTriggered = userTriggered
     })
   }
 

@@ -72,7 +72,7 @@ export class NotesController extends AbstractViewController {
 
         for (const selectedId of selectedUuids) {
           if (!activeNoteUuids.includes(selectedId)) {
-            this.selectionController.deselectItem({ uuid: selectedId })
+            this.selectionController.deselectItem({ uuid: selectedId }, false)
           }
         }
       }),
@@ -264,7 +264,7 @@ export class NotesController extends AbstractViewController {
     })
 
     runInAction(() => {
-      this.selectionController.deselectAll()
+      this.selectionController.deselectAll(false)
       this.contextMenuOpen = false
     })
   }
@@ -281,7 +281,7 @@ export class NotesController extends AbstractViewController {
   }
 
   unselectNotes(): void {
-    this.selectionController.deselectAll()
+    this.selectionController.deselectAll(false)
   }
 
   getSpellcheckStateForNote(note: SNNote) {

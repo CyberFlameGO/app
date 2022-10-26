@@ -338,7 +338,7 @@ export class NoteHistoryController {
       title: revision.payload.content.title ? revision.payload.content.title + ' (copy)' : undefined,
     })
 
-    this.selectionController.selectItem(duplicatedItem.uuid).catch(console.error)
+    this.selectionController.selectItem(duplicatedItem.uuid, true).catch(console.error)
   }
 
   deleteRemoteRevision = async (revisionEntry: RevisionListEntry) => {

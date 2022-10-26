@@ -15,7 +15,7 @@ const MultipleSelectedFiles = ({ filesController, selectionController }: Props) 
   const count = selectionController.selectedFilesCount
 
   const cancelMultipleSelection = useCallback(() => {
-    selectionController.cancelMultipleSelection()
+    selectionController.cancelMultipleSelection(true)
   }, [selectionController])
 
   return (

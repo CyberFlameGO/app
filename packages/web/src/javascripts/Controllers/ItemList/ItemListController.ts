@@ -417,7 +417,7 @@ export class ItemListController
       this.closeItemController(activeController)
       this.selectionController.selectNextItem()
     } else if (this.shouldSelectActiveItem(activeItem) && activeItem) {
-      await this.selectionController.selectItem(activeItem.uuid).catch(console.error)
+      await this.selectionController.selectItem(activeItem.uuid, false).catch(console.error)
     } else if (this.shouldSelectFirstItem(itemsReloadSource)) {
       await this.selectFirstItem()
     } else if (this.shouldSelectNextItemOrCreateNewNote(activeItem)) {

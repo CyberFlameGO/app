@@ -27,6 +27,7 @@ export class SelectedItemsController
   lastSelectedItem: ListableContentItem | undefined
   selectedUuids: Set<UuidString> = observable(new Set<UuidString>())
   selectedItems: Record<UuidString, ListableContentItem> = {}
+  currentSelectionWasUserTriggered = false
   private itemListController!: ItemListController
 
   override deinit(): void {
@@ -76,7 +77,7 @@ export class SelectedItemsController
     if (!state) {
       return
     }
-    if (!this.selectedUuids.size && state.selectedUuids.length > 0) {
+    if (!this.currentSelectionWasUserTriggered && state.selectedUuids.length > 0) {
       void this.selectUuids(state.selectedUuids)
     }
   }
@@ -90,7 +91,7 @@ export class SelectedItemsController
         ({ changed, inserted, removed }) => {
           runInAction(() => {
             for (const removedItem of removed) {
-              this.removeSelectedItem(removedItem.uuid)
+              this.removeSelectedItem(removedItem.uuid, false)
             }
 
             for (const item of [...changed, ...inserted]) {
@@ -139,19 +140,20 @@ export class SelectedItemsController
     this.selectedItems = Object.fromEntries(this.getSelectedItems().map((item) => [item.uuid, item]))
   }
 
-  setSelectedUuids = (selectedUuids: Set<UuidString>) => {
+  setSelectedUuids = (selectedUuids: Set<UuidString>, userTriggered: boolean) => {
     this.selectedUuids = new Set(selectedUuids)
     this.setSelectedItems()
+    this.currentSelectionWasUserTriggered = userTriggered
   }
 
-  private removeSelectedItem = (uuid: UuidString) => {
+  private removeSelectedItem = (uuid: UuidString, userTriggered: boolean) => {
     this.selectedUuids.delete(uuid)
-    this.setSelectedUuids(this.selectedUuids)
+    this.setSelectedUuids(this.selectedUuids, userTriggered)
     delete this.selectedItems[uuid]
   }
 
-  public deselectItem = (item: { uuid: ListableContentItem['uuid'] }): void => {
-    this.removeSelectedItem(item.uuid)
+  public deselectItem = (item: { uuid: ListableContentItem['uuid'] }, userTriggered: boolean): void => {
+    this.removeSelectedItem(item.uuid, userTriggered)
 
     if (item.uuid === this.lastSelectedItem?.uuid) {
       this.lastSelectedItem = undefined
@@ -162,15 +164,18 @@ export class SelectedItemsController
     return this.selectedUuids.has(item.uuid)
   }
 
-  private selectItemsRange = async ({
-    selectedItem,
-    startingIndex,
-    endingIndex,
-  }: {
-    selectedItem?: ListableContentItem
-    startingIndex?: number
-    endingIndex?: number
-  }): Promise<void> => {
+  private selectItemsRange = async (
+    {
+      selectedItem,
+      startingIndex,
+      endingIndex,
+    }: {
+      selectedItem?: ListableContentItem
+      startingIndex?: number
+      endingIndex?: number
+    },
+    userTriggered: boolean,
+  ): Promise<void> => {
     const items = this.itemListController.renderedItems
 
     const lastSelectedItemIndex = startingIndex ?? items.findIndex((item) => item.uuid == this.lastSelectedItem?.uuid)
@@ -190,41 +195,44 @@ export class SelectedItemsController
 
     for (const item of authorizedItems) {
       runInAction(() => {
-        this.setSelectedUuids(this.selectedUuids.add(item.uuid))
+        this.setSelectedUuids(this.selectedUuids.add(item.uuid), userTriggered)
         this.lastSelectedItem = item
       })
     }
   }
 
-  cancelMultipleSelection = () => {
+  cancelMultipleSelection = (userTriggered: boolean) => {
     this.io.cancelAllKeyboardModifiers()
 
     const firstSelectedItem = this.firstSelectedItem
 
     if (firstSelectedItem) {
-      this.replaceSelection(firstSelectedItem)
+      this.replaceSelection(firstSelectedItem, userTriggered)
     } else {
-      this.deselectAll()
+      this.deselectAll(userTriggered)
     }
   }
 
-  private replaceSelection = (item: ListableContentItem): void => {
-    this.deselectAll()
-    runInAction(() => this.setSelectedUuids(this.selectedUuids.add(item.uuid)))
+  private replaceSelection = (item: ListableContentItem, userTriggered: boolean): void => {
+    this.deselectAll(userTriggered)
+    runInAction(() => this.setSelectedUuids(this.selectedUuids.add(item.uuid), userTriggered))
 
     this.lastSelectedItem = item
   }
 
-  selectAll = () => {
-    void this.selectItemsRange({
-      startingIndex: 0,
-      endingIndex: this.itemListController.listLength - 1,
-    })
+  selectAll = (userTriggered: boolean) => {
+    void this.selectItemsRange(
+      {
+        startingIndex: 0,
+        endingIndex: this.itemListController.listLength - 1,
+      },
+      userTriggered,
+    )
   }
 
-  deselectAll = (): void => {
+  deselectAll = (userTriggered: boolean): void => {
     this.selectedUuids.clear()
-    this.setSelectedUuids(this.selectedUuids)
+    this.setSelectedUuids(this.selectedUuids, userTriggered)
 
     this.lastSelectedItem = undefined
   }
@@ -243,7 +251,7 @@ export class SelectedItemsController
 
   selectItem = async (
     uuid: UuidString,
-    userTriggered?: boolean,
+    userTriggered: boolean,
   ): Promise<{
     didSelect: boolean
   }> => {
@@ -262,17 +270,17 @@ export class SelectedItemsController
 
     if (userTriggered && (hasMeta || hasCtrl)) {
       if (this.selectedUuids.has(uuid) && hasMoreThanOneSelected) {
-        this.removeSelectedItem(uuid)
+        this.removeSelectedItem(uuid, userTriggered)
       } else if (isAuthorizedForAccess) {
-        this.setSelectedUuids(this.selectedUuids.add(uuid))
+        this.setSelectedUuids(this.selectedUuids.add(uuid), userTriggered)
         this.lastSelectedItem = item
       }
     } else if (userTriggered && hasShift) {
-      await this.selectItemsRange({ selectedItem: item })
+      await this.selectItemsRange({ selectedItem: item }, userTriggered)
     } else {
       const shouldSelectNote = hasMoreThanOneSelected || !this.selectedUuids.has(uuid)
       if (shouldSelectNote && isAuthorizedForAccess) {
-        this.replaceSelection(item)
+        this.replaceSelection(item, userTriggered)
       }
     }
 
@@ -307,7 +315,7 @@ export class SelectedItemsController
     if (!userTriggered && itemsForUuids.some((item) => item.protected && isFile(item))) {
       return
     }
-    this.setSelectedUuids(new Set(uuids))
+    this.setSelectedUuids(new Set(uuids), userTriggered)
     if (itemsForUuids.length === 1) {
       void this.openSingleSelectedItem()
     }
