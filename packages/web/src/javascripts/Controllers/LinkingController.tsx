@@ -250,7 +250,7 @@ export class LinkingController extends AbstractViewController {
       await this.navigationController.setSelectedTag(item)
       return AppPaneId.Items
     } else if (item instanceof SNNote) {
-      await this.navigationController.selectHomeNavigationView()
+      await this.navigationController.selectHomeNavigationView(true)
       const { didSelect } = await this.selectionController.selectItem(item.uuid, true)
       if (didSelect) {
         return AppPaneId.Editor

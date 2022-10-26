@@ -576,7 +576,7 @@ export class ItemListController
     this.notesController.unselectNotes()
 
     if (this.navigationController.isInSmartView() && !this.navigationController.isInHomeView()) {
-      await this.navigationController.selectHomeNavigationView()
+      await this.navigationController.selectHomeNavigationView(true)
     }
 
     const titleFormat =

@@ -45,6 +45,7 @@ export class NavigationController
   editing_: SNTag | SmartView | undefined
   editingFrom?: TagListSectionType
   addingSubtagTo: SNTag | undefined
+  lastTagChangeWasUserTriggered = false
 
   contextMenuOpen = false
   contextMenuOpenFrom?: TagListSectionType
@@ -123,13 +124,18 @@ export class NavigationController
           const currentSelectedTag = this.selected_
 
           if (!currentSelectedTag) {
+            if (!this.selectedUuid) {
+              void this.selectHomeNavigationView(false)
+            }
             return
           }
 
           const updatedReference =
             FindItem(changed, currentSelectedTag.uuid) || FindItem(this.smartViews, currentSelectedTag.uuid)
           if (updatedReference) {
-            this.setSelectedTagInstance(updatedReference as AnyTag)
+            const wasUserTriggered =
+              this.lastTagChangeWasUserTriggered && updatedReference.uuid === currentSelectedTag.uuid
+            this.setSelectedTagInstance(updatedReference as AnyTag, wasUserTriggered)
           }
 
           if (isSystemView(currentSelectedTag as SmartView)) {
@@ -137,7 +143,7 @@ export class NavigationController
           }
 
           if (FindItem(removed, currentSelectedTag.uuid)) {
-            this.setSelectedTagInstance(this.smartViews[0])
+            this.setSelectedTagInstance(this.smartViews[0], false)
           }
         })
       }),
@@ -176,16 +182,6 @@ export class NavigationController
     }
   }
 
-  selectHydratedTagOrDefault = () => {
-    if (this.selectedUuid && !this.selected_) {
-      this.findAndSetTag(this.selectedUuid)
-    }
-
-    if (!this.selectedUuid) {
-      void this.selectHomeNavigationView()
-    }
-  }
-
   getPersistableValue = (): NavigationControllerPersistableValue => {
     return {
       selectedTagUuid: this.selectedUuid ? this.selectedUuid : SystemViewId.AllNotes,
@@ -194,12 +190,11 @@ export class NavigationController
 
   hydrateFromPersistedValue = (state: NavigationControllerPersistableValue | undefined) => {
     if (!state) {
-      void this.selectHomeNavigationView()
+      void this.selectHomeNavigationView(false)
       return
     }
-    if (state.selectedTagUuid) {
-      this.selectedUuid = state.selectedTagUuid
-      this.selectHydratedTagOrDefault()
+    if (state.selectedTagUuid && !this.lastTagChangeWasUserTriggered) {
+      this.findAndSetTag(state.selectedTagUuid)
     }
   }
 
@@ -440,7 +435,7 @@ export class NavigationController
 
     this.previouslySelected_ = this.selected_
 
-    this.setSelectedTagInstance(tag)
+    this.setSelectedTagInstance(tag, userTriggered)
 
     if (tag && this.application.items.isTemplateItem(tag)) {
       return
@@ -455,12 +450,12 @@ export class NavigationController
     )
   }
 
-  public async selectHomeNavigationView(): Promise<void> {
-    await this.setSelectedTag(this.homeNavigationView)
+  public async selectHomeNavigationView(userTriggered: boolean): Promise<void> {
+    await this.setSelectedTag(this.homeNavigationView, { userTriggered })
   }
 
-  public async selectFilesView() {
-    await this.setSelectedTag(this.filesNavigationView)
+  public async selectFilesView(userTriggered: boolean) {
+    await this.setSelectedTag(this.filesNavigationView, { userTriggered })
   }
 
   get homeNavigationView(): SmartView {
@@ -471,10 +466,11 @@ export class NavigationController
     return this.smartViews.find((view) => view.uuid === SystemViewId.Files) as SmartView
   }
 
-  private setSelectedTagInstance(tag: AnyTag | undefined): void {
+  private setSelectedTagInstance(tag: AnyTag | undefined, userTriggered: boolean): void {
     runInAction(() => {
       this.selected_ = tag
       this.selectedUuid = tag ? tag.uuid : undefined
+      this.lastTagChangeWasUserTriggered = userTriggered
     })
   }
 
