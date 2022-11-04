@@ -95,7 +95,8 @@ class NoteGroupView extends AbstractComponent<Props, State> {
 
     const hasControllers = this.state.controllers.length > 0
 
-    const canRenderEditorView = this.state.selectedPane === AppPaneId.Editor || !this.state.isInMobileView
+    // const canRenderEditorView = this.state.selectedPane === AppPaneId.Editor || !this.state.isInMobileView
+    const canRenderEditorView = true
 
     return (
       <div id={ElementIds.EditorColumn} className="app-column app-column-third flex h-full flex-col pt-safe-top">

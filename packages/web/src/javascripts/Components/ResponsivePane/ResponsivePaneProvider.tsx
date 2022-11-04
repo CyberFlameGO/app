@@ -16,10 +16,21 @@ import {
 import { AppPaneId } from './AppPaneMetadata'
 import { PaneController } from '../../Controllers/PaneController'
 import { observer } from 'mobx-react-lite'
+import { MediaQueryBreakpoints } from '@/Hooks/useMediaQuery'
+import {
+  animateSlideFromRight,
+  animateSlideFromLeft,
+  animateSlideToRight,
+  AvailableAnimations,
+  PaneAction,
+  PaneAnimations,
+  animateSlideToLeft,
+} from './Animation/PaneAnimations'
 
 type ResponsivePaneData = {
   selectedPane: AppPaneId
   toggleAppPane: (paneId: AppPaneId) => void
+
   isNotesListVisibleOnTablets: boolean
   toggleNotesListOnTablets: () => void
 }
@@ -56,6 +67,39 @@ function useStateRef<State>(state: State): MutableRefObject<State> {
 
 const MemoizedChildren = memo(({ children }: ChildrenProps) => <>{children}</>)
 
+const SelectedPaneAttributeName = 'data-selected-pane'
+
+function setPaneAttributeFromAction(paneElement: HTMLElement, action: PaneAction) {
+  if (action === 'select') {
+    paneElement.setAttribute(SelectedPaneAttributeName, '')
+  } else {
+    paneElement.removeAttribute(SelectedPaneAttributeName)
+  }
+}
+
+async function animatePane(paneElement: HTMLElement, animation: AvailableAnimations, paneAction: PaneAction) {
+  switch (animation) {
+    case 'slide-from-right':
+      paneElement.style.opacity = '0'
+      setPaneAttributeFromAction(paneElement, paneAction)
+      await animateSlideFromRight(paneElement)
+      break
+    case 'slide-from-left':
+      paneElement.style.opacity = '0'
+      setPaneAttributeFromAction(paneElement, paneAction)
+      await animateSlideFromLeft(paneElement)
+      break
+    case 'slide-to-right':
+      await animateSlideToRight(paneElement)
+      setPaneAttributeFromAction(paneElement, paneAction)
+      break
+    case 'slide-to-left':
+      await animateSlideToLeft(paneElement)
+      setPaneAttributeFromAction(paneElement, paneAction)
+      break
+  }
+}
+
 const ResponsivePaneProvider = ({ paneController, children }: ProviderProps) => {
   const currentSelectedPane = paneController.currentPane
   const previousSelectedPane = paneController.previousPane
@@ -70,13 +114,27 @@ const ResponsivePaneProvider = ({ paneController, children }: ProviderProps) => 
   )
 
   useEffect(() => {
-    if (previousSelectedPane) {
-      const previousPaneElement = document.getElementById(ElementIds[previousSelectedPane])
-      previousPaneElement?.removeAttribute('data-selected-pane')
+    const handlePaneChange = async () => {
+      const canAnimate = window.matchMedia(MediaQueryBreakpoints.sm).matches
+
+      if (previousSelectedPane) {
+        const previousPaneElement = document.getElementById(ElementIds[previousSelectedPane])
+        if (previousPaneElement && PaneAnimations[ElementIds[previousSelectedPane]] && canAnimate) {
+          await animatePane(previousPaneElement, PaneAnimations[ElementIds[previousSelectedPane]].unselect, 'unselect')
+        } else {
+          previousPaneElement?.removeAttribute(SelectedPaneAttributeName)
+        }
+      }
+
+      const currentPaneElement = document.getElementById(ElementIds[currentSelectedPane])
+      if (currentPaneElement && PaneAnimations[ElementIds[currentSelectedPane]] && canAnimate) {
+        await animatePane(currentPaneElement, PaneAnimations[ElementIds[currentSelectedPane]].select, 'select')
+      } else {
+        currentPaneElement?.setAttribute(SelectedPaneAttributeName, '')
+      }
     }
 
-    const currentPaneElement = document.getElementById(ElementIds[currentSelectedPane])
-    currentPaneElement?.setAttribute('data-selected-pane', '')
+    void handlePaneChange()
   }, [currentSelectedPane, previousSelectedPane])
 
   const addAndroidBackHandler = useAndroidBackHandler()
