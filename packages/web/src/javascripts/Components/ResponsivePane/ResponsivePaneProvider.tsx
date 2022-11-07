@@ -78,6 +78,13 @@ function setPaneAttributeFromAction(paneElement: HTMLElement, action: PaneAction
 }
 
 async function animatePane(paneElement: HTMLElement, animation: AvailableAnimations, paneAction: PaneAction) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (prefersReducedMotion) {
+    setPaneAttributeFromAction(paneElement, paneAction)
+    return
+  }
+
   switch (animation) {
     case 'slide-from-right':
       paneElement.style.opacity = '0'
