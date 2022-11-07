@@ -40,7 +40,6 @@ function animate(
       }
 
       if (elapsed < maxDuration) {
-        // Stop the animation after 1 second
         previousTimeStamp = timestamp
         if (!done) {
           window.requestAnimationFrame(step)
