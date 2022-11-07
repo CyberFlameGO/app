@@ -6,4 +6,6 @@ export enum NoteType {
   Spreadsheet = 'spreadsheet',
   Task = 'task',
   Plain = 'plain-text',
+  Blocks = 'blocks',
+  Unknown = 'unknown',
 }

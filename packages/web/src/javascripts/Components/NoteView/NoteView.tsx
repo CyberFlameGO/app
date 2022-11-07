@@ -8,6 +8,7 @@ import ProtectedItemOverlay from '@/Components/ProtectedItemOverlay/ProtectedIte
 import { ElementIds } from '@/Constants/ElementIDs'
 import { PrefDefaults } from '@/Constants/PrefDefaults'
 import { StringDeleteNote, STRING_DELETE_LOCKED_ATTEMPT, STRING_DELETE_PLACEHOLDER_ATTEMPT } from '@/Constants/Strings'
+import { featureTrunkEnabled, FeatureTrunkName } from '@/FeatureTrunk'
 import { log, LoggingDomain } from '@/Logging'
 import { debounce, isDesktopApplication, isMobileScreen, isTabletScreen } from '@/Utils'
 import { classNames } from '@/Utils/ConcatenateClassNames'
@@ -32,6 +33,7 @@ import {
 import { confirmDialog, KeyboardKey, KeyboardModifier } from '@standardnotes/ui-services'
 import { ChangeEventHandler, createRef, KeyboardEventHandler, RefObject } from 'react'
 import { EditorEventSource } from '../../Types/EditorEventSource'
+import { BlockEditor } from '../BlockEditor/BlockEditor'
 import IndicatorCircle from '../IndicatorCircle/IndicatorCircle'
 import LinkedItemBubblesContainer from '../LinkedItems/LinkedItemBubblesContainer'
 import LinkedItemsButton from '../LinkedItems/LinkedItemsButton'
@@ -1024,6 +1026,15 @@ class NoteView extends AbstractComponent<NoteViewProps, State> {
 
     const renderHeaderOptions = isMobileScreen() ? !this.state.plaintextEditorFocused : true
 
+    const editorMode =
+      featureTrunkEnabled(FeatureTrunkName.Blocks) && this.note.noteType === NoteType.Blocks
+        ? 'blocks'
+        : this.state.editorStateDidLoad && !this.state.editorComponentViewer && !this.state.textareaUnloading
+        ? 'plain'
+        : this.state.editorComponentViewer
+        ? 'component'
+        : 'plain'
+
     return (
       <div aria-label="Note" className="section editor sn-component h-full md:max-h-full" ref={this.noteViewElementRef}>
         {this.note && (
@@ -1117,7 +1128,7 @@ class NoteView extends AbstractComponent<NoteViewProps, State> {
 
         <div
           id={ElementIds.EditorContent}
-          className={`${ElementIds.EditorContent} z-editor-content`}
+          className={`${ElementIds.EditorContent} z-editor-content overflow-scroll`}
           ref={this.editorContentRef}
         >
           {this.state.marginResizersEnabled && this.editorContentRef.current ? (
@@ -1134,7 +1145,7 @@ class NoteView extends AbstractComponent<NoteViewProps, State> {
             />
           ) : null}
 
-          {this.state.editorComponentViewer && (
+          {editorMode === 'component' && this.state.editorComponentViewer && (
             <div className="component-view">
               <ComponentView
                 key={this.state.editorComponentViewer.identifier}
@@ -1146,7 +1157,7 @@ class NoteView extends AbstractComponent<NoteViewProps, State> {
             </div>
           )}
 
-          {this.state.editorStateDidLoad && !this.state.editorComponentViewer && !this.state.textareaUnloading && (
+          {editorMode === 'plain' && (
             <textarea
               autoComplete="off"
               dir="auto"
@@ -1164,6 +1175,12 @@ class NoteView extends AbstractComponent<NoteViewProps, State> {
                 this.state.fontSize && getPlaintextFontSize(this.state.fontSize),
               )}
             ></textarea>
+          )}
+
+          {editorMode === 'blocks' && (
+            <div className={classNames('blocks-editor w-full flex-grow overflow-hidden overflow-y-scroll')}>
+              <BlockEditor key={this.note.uuid} application={this.application} note={this.note} />
+            </div>
           )}
 
           {this.state.marginResizersEnabled && this.editorContentRef.current ? (
