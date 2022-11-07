@@ -31,7 +31,6 @@ export function animateSlideFromRight(paneElement: HTMLElement) {
       const elapsed = timestamp - start
 
       if (previousTimeStamp !== timestamp) {
-        // Math.min() is used here to make sure the element stops at exactly 200px
         const count = 100 - Math.min(0.85 * elapsed, 100)
         paneElement.style.transform = `translateX(${count}%)`
         paneElement.style.opacity = Math.min(0.01 * elapsed, 1).toString()
