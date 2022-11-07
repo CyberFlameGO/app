@@ -78,13 +78,6 @@ function setPaneAttributeFromAction(paneElement: HTMLElement, action: PaneAction
 }
 
 async function animatePane(paneElement: HTMLElement, animation: AvailableAnimations, paneAction: PaneAction) {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-  if (prefersReducedMotion) {
-    setPaneAttributeFromAction(paneElement, paneAction)
-    return
-  }
-
   switch (animation) {
     case 'slide-from-right':
       paneElement.style.opacity = '0'
@@ -122,11 +115,15 @@ const ResponsivePaneProvider = ({ paneController, children }: ProviderProps) => 
 
   useEffect(() => {
     const handlePaneChange = async () => {
-      const canAnimate = window.matchMedia(MediaQueryBreakpoints.sm).matches
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const isMobileScreen = window.matchMedia(MediaQueryBreakpoints.sm).matches
+      const canAnimate = isMobileScreen && !prefersReducedMotion
 
       if (previousSelectedPane) {
         const previousPaneElement = document.getElementById(ElementIds[previousSelectedPane])
-        if (previousPaneElement && PaneAnimations[ElementIds[previousSelectedPane]] && canAnimate) {
+
+        const shouldAnimate = previousPaneElement && PaneAnimations[ElementIds[previousSelectedPane]] && canAnimate
+        if (shouldAnimate) {
           paneController.setAnimatingPane(previousSelectedPane)
           await animatePane(previousPaneElement, PaneAnimations[ElementIds[previousSelectedPane]].unselect, 'unselect')
           paneController.setAnimatingPane(null)
@@ -136,7 +133,9 @@ const ResponsivePaneProvider = ({ paneController, children }: ProviderProps) => 
       }
 
       const currentPaneElement = document.getElementById(ElementIds[currentSelectedPane])
-      if (currentPaneElement && PaneAnimations[ElementIds[currentSelectedPane]] && canAnimate) {
+
+      const shouldAnimate = currentPaneElement && PaneAnimations[ElementIds[currentSelectedPane]] && canAnimate
+      if (shouldAnimate) {
         paneController.setAnimatingPane(currentSelectedPane)
         await animatePane(currentPaneElement, PaneAnimations[ElementIds[currentSelectedPane]].select, 'select')
         paneController.setAnimatingPane(null)
