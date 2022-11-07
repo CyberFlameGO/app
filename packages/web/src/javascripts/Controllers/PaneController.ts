@@ -7,6 +7,7 @@ import { MediaQueryBreakpoints } from '@/Hooks/useMediaQuery'
 export class PaneController {
   currentPane: AppPaneId = isMobileScreen() ? AppPaneId.Items : AppPaneId.Editor
   previousPane: AppPaneId = isMobileScreen() ? AppPaneId.Items : AppPaneId.Editor
+  animatingPane: AppPaneId | null = null
   isInMobileView = isMobileScreen()
   protected disposers: Disposer[] = []
 
@@ -14,10 +15,12 @@ export class PaneController {
     makeObservable(this, {
       currentPane: observable,
       previousPane: observable,
+      animatingPane: observable,
       isInMobileView: observable,
 
       setCurrentPane: action,
       setPreviousPane: action,
+      setAnimatingPane: action,
       setIsInMobileView: action,
     })
 
@@ -52,6 +55,10 @@ export class PaneController {
 
   setPreviousPane(pane: AppPaneId): void {
     this.previousPane = pane
+  }
+
+  setAnimatingPane(pane: AppPaneId | null): void {
+    this.animatingPane = pane
   }
 
   setIsInMobileView(isInMobileView: boolean) {

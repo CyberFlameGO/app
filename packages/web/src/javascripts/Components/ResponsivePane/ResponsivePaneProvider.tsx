@@ -120,7 +120,9 @@ const ResponsivePaneProvider = ({ paneController, children }: ProviderProps) => 
       if (previousSelectedPane) {
         const previousPaneElement = document.getElementById(ElementIds[previousSelectedPane])
         if (previousPaneElement && PaneAnimations[ElementIds[previousSelectedPane]] && canAnimate) {
+          paneController.setAnimatingPane(previousSelectedPane)
           await animatePane(previousPaneElement, PaneAnimations[ElementIds[previousSelectedPane]].unselect, 'unselect')
+          paneController.setAnimatingPane(null)
         } else {
           previousPaneElement?.removeAttribute(SelectedPaneAttributeName)
         }
@@ -128,14 +130,16 @@ const ResponsivePaneProvider = ({ paneController, children }: ProviderProps) => 
 
       const currentPaneElement = document.getElementById(ElementIds[currentSelectedPane])
       if (currentPaneElement && PaneAnimations[ElementIds[currentSelectedPane]] && canAnimate) {
+        paneController.setAnimatingPane(currentSelectedPane)
         await animatePane(currentPaneElement, PaneAnimations[ElementIds[currentSelectedPane]].select, 'select')
+        paneController.setAnimatingPane(null)
       } else {
         currentPaneElement?.setAttribute(SelectedPaneAttributeName, '')
       }
     }
 
     void handlePaneChange()
-  }, [currentSelectedPane, previousSelectedPane])
+  }, [currentSelectedPane, paneController, previousSelectedPane])
 
   const addAndroidBackHandler = useAndroidBackHandler()
 
